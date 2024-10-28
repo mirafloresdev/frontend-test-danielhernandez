@@ -1,0 +1,43 @@
+<form [formGroup]="form">
+    <div class="form-container" nz-row [nzGutter]="16">
+        <!-- Columna de campos a la izquierda -->
+        <div nz-col [nzSpan]="12">
+
+            <label>Fecha de Creación</label>
+            <input nz-input type="date" placeholder="Seleccione la fecha de creación" formControlName="fechaCreacion" />
+
+            <label>Monto</label>
+            <input  nz-input type="number" placeholder="Ingrese el monto" formControlName="monto" />
+        </div>
+
+        <!-- Columna de campos a la derecha -->
+        <div nz-col [nzSpan]="12">
+            <label>Plazo</label>
+            <nz-select placeholder="Seleccione plazo" formControlName="plazo">
+                <nz-option nzValue="12" nzLabel="12 meses"></nz-option>
+                <nz-option nzValue="24" nzLabel="24 meses"></nz-option>
+                <nz-option nzValue="36" nzLabel="36 meses"></nz-option>
+                <nz-option nzValue="48" nzLabel="48 meses"></nz-option>
+            </nz-select>
+
+            <label>Forma de Pago</label>
+            <nz-select placeholder="Seleccione forma de pago" formControlName="id_forma_pago">
+                <nz-option *ngFor="let pago of formasPago" nzValue="{{pago.idFormaPago}}" nzLabel="{{pago.descripcion}}"></nz-option>
+
+            </nz-select>
+
+            <button nz-button nzType="primary" class="guardar-button" (click)="save()">Guardar</button>
+        </div>
+      <div *ngIf="spin" nz-col [nzSpan]="12" style="margin-top: 25px">
+        <nz-spin style="margin-left: 370px" nzSimple></nz-spin>
+      </div>
+      <div *ngIf="alertsuccess" style="margin-top: 25px; margin-left: 150px">
+        <nz-alert
+          nzType="success"
+          nzMessage="Exito!"
+          nzDescription="La solicitud ha sido creada correctamente."
+          nzShowIcon
+        ></nz-alert>
+      </div>
+    </div>
+</form>

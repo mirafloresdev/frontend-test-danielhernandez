@@ -1,0 +1,38 @@
+<nz-card class="cardShadow">
+    <div nz-row>
+       <div nz-col nzSpan="23">
+          <h2> <i nz-icon nzType="bars" nzTheme="outline"></i> Gestión de Clientes </h2>
+       </div><div nz-col nzSpan="1"> <button nz-button nzType="primary" (click)="create()" class="btn_add" nzShape="circle" nz-tooltip nzTooltipTitle="Agregar"> <span nz-icon nzType="plus" nzTheme="outline"></span> </button> </div>
+    </div>
+    <nz-divider nzType="horizontal" style="height: 1px !important;background-color: #001529;"></nz-divider>
+    <div nz-row>
+       <nz-table nzShowPagination #rowSelectionTable nzShowSizeChanger #basicTable (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzData]="data_clientes" [nzPageSizeOptions]="[5, 10, 20, 50, 100]" [nzPageSize]="4" [nzShowSizeChanger]="true">
+       <thead>
+          <tr>
+             <th>ID Cliente</th>
+             <th>DUI</th>
+             <th>NIT</th>
+             <th>Nombre Cliente</th>
+             <th>Sexo</th>
+             <th>Actividad Económica</th>
+             <th>Estado Civil</th>
+             <th style="text-align: center;"><i nz-icon nzType="bars" nzTheme="outline"></i> Acciones</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr *ngFor="let c of data_clientes">
+             <td>{{ c.idPersona }}</td>
+             <td>{{ c.dui}}</td>
+             <td>{{ c.nit}}</td>
+             <td>{{ c.nombres +' '+ c.apellidos}}</td>
+             <td>{{ c.sexo}}</td>
+             <td>{{ c.actividadEconomica.descripcion}}</td>
+             <td>{{c.estadoCivil.descripcion}}</td>
+             <td style="text-align: center; align-items: center;">
+                <button nz-button nzType="primary" (click)="edit(c)" class="btn_action" nzShape="circle" nz-tooltip nzTooltipTitle="Editar" nzTooltipColor="blue"> <span nz-icon nzType="edit" nzTheme="outline"></span> </button>
+                <button nz-button nzType="primary" (click)="ver_solicitudes(c)" class="btn_action" nzShape="circle" nzDanger nz-tooltip nzTooltipTitle="Ver Solicitudes" nzTooltipColor="red"> <span nz-icon nzType="eye" nzTheme="outline"></span> </button> </td>
+          </tr>
+       </tbody>
+       </nz-table>
+    </div>
+ </nz-card>

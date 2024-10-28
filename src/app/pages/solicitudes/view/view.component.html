@@ -1,0 +1,31 @@
+<nz-card class="cardShadow">
+    <div nz-row>
+       <div nz-col nzSpan="23">
+          <h2> <i nz-icon nzType="bars" nzTheme="outline"></i> Gestión de Solicitudes para cliente: {{clienteNombre}} </h2>
+       </div><div nz-col nzSpan="1"> <button nz-button nzType="primary" (click)="create()" class="btn_add" nzShape="circle" nz-tooltip nzTooltipTitle="Agregar"> <span nz-icon nzType="plus" nzTheme="outline"></span> </button> </div>
+    </div>
+    <nz-divider nzType="horizontal" style="height: 1px !important;background-color: #001529;"></nz-divider>
+    <div nz-row>
+       <nz-table nzShowPagination #rowSelectionTable nzShowSizeChanger #basicTable (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzData]="data_solicitud" [nzPageSizeOptions]="[5, 10, 20, 50, 100]" [nzPageSize]="4" [nzShowSizeChanger]="true">
+       <thead>
+          <tr>
+             <th>ID Solicitud</th>
+             <th>Fecha Creación</th>
+             <th>Monto</th>
+             <th>Forma Pago</th>
+             <th style="text-align: center;"><i nz-icon nzType="bars" nzTheme="outline"></i> Acciones</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr *ngFor="let c of data_solicitud">
+             <td>{{ c.idSolicitud }}</td>
+             <td>{{ c.fechaCreacion | date: 'dd/MM/yyyy' }}</td>
+             <td>${{ c.monto | number:'1.0-2'}}</td>
+             <td>{{c.formaPago.descripcion}}</td>
+             <td style="text-align: center; align-items: center;">
+                <button nz-button nzType="primary" nzDanger (click)="edit(c)" class="btn_action" nzShape="circle" nz-tooltip nzTooltipTitle="Editar" nzTooltipColor="blue"> <span nz-icon nzType="edit" nzTheme="outline"></span> </button>
+             </tr>
+       </tbody>
+       </nz-table>
+    </div>
+ </nz-card>

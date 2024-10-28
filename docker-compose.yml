@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_testdavivienda
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: testdavivienda
+      POSTGRES_PASSWORD: testdavivienda
+      POSTGRES_DB: testdavivienda
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

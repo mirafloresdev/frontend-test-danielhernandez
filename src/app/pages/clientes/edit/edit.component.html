@@ -1,0 +1,53 @@
+<form [formGroup]="form">
+  <div class="form-container" nz-row [nzGutter]="16">
+    <!-- Columna de campos a la izquierda -->
+    <div nz-col [nzSpan]="12">
+      <label>DUI</label>
+      <input nz-input placeholder="Ingrese su DUI" formControlName="dui"/>
+
+      <label>NIT</label>
+      <input nz-input placeholder="Ingrese su NIT" formControlName="nit"/>
+
+      <label>Nombres</label>
+      <input nz-input placeholder="Ingrese sus nombres" formControlName="nombres"/>
+
+      <label>Apellidos</label>
+      <input nz-input placeholder="Ingrese sus apellidos" formControlName="apellidos"/>
+    </div>
+
+    <!-- Columna de campos a la derecha -->
+    <div nz-col [nzSpan]="12">
+      <label>Sexo</label>
+      <nz-select placeholder="Seleccione sexo" formControlName="sexo">
+        <nz-option nzValue="F" nzLabel="Femenino"></nz-option>
+        <nz-option nzValue="M" nzLabel="Masculino"></nz-option>
+      </nz-select>
+
+      <label>Actividad Económica</label>
+      <nz-select placeholder="Seleccione actividad" formControlName="id_actividad_economica">
+        <nz-option *ngFor="let actividad of actividades_economicas" [nzValue]="actividad.idActividadEconomica"
+                   [nzLabel]="actividad.descripcion"></nz-option>
+      </nz-select>
+
+      <label>Estado Civil</label>
+      <nz-select placeholder="Seleccione estado civil" formControlName="id_estado_civil">
+        <nz-option *ngFor="let estado of estados_civil" [nzValue]="estado.idEstadoCivil"
+                   [nzLabel]="estado.descripcion"></nz-option>
+      </nz-select>
+
+      <button nz-button nzType="primary" class="guardar-button" (click)="save()">Guardar</button>
+    </div>
+    <div *ngIf="spin" nz-col [nzSpan]="12" style="margin-top: 25px">
+      <nz-spin style="margin-left: 370px" nzSimple></nz-spin>
+    </div>
+    <div *ngIf="alertasuccess" style="margin-top: 25px; margin-left: 150px">
+      <nz-alert
+        nzType="success"
+        nzMessage="Exito!"
+        nzDescription="La informacion del cliente ha sido actualizada correctamente."
+        nzShowIcon
+      ></nz-alert>
+    </div>
+  </div>
+</form>
+
